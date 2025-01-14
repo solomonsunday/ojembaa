@@ -290,11 +290,15 @@ const User = () => {
             )
           )}
         </div>
-        <PaginationButton
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          totalPages={pageInfo?.totalPages!}
-        />
+        {loading ? (
+          ""
+        ) : (
+          <PaginationButton
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            totalPages={pageInfo?.totalPages!}
+          />
+        )}
       </Container>
     </AdminLayout>
   );

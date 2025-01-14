@@ -19,7 +19,7 @@ import DeliveryList from "@/components/Admin/deliveriesList";
 
 const Dashboard = () => {
   const currentUser: IAppUsers = getCurrentUser();
-  const { fetchAllUsers } = useGetUsers();
+  const { fetchAllUsers, pageInfo } = useGetUsers();
 
   const { fetchStat, loading: loadingStats, stats } = useGetStats();
   const { fetchRecentDelivery, recentDelivery, loading } =
@@ -39,7 +39,7 @@ const Dashboard = () => {
   }>();
 
   useEffect(() => {
-    fetchAllUsers();
+    fetchAllUsers(pageInfo!);
     fetchStat();
   }, []);
 
@@ -103,7 +103,7 @@ const Dashboard = () => {
             {/* <SalesChart /> */}
 
             <div className="mt-5">
-              <hr className="border-slate-500"/>
+              <hr className="border-slate-500" />
             </div>
             <DeliveryList deliveriesData={recentDelivery} loading={loading} />
           </div>

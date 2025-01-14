@@ -21,7 +21,7 @@ const Reconciliation = () => {
     transactions,
     loading: loadingTransactions,
   } = useGetTransactions();
-  const { fetchAllUsers } = useGetUsers();
+  const { fetchAllUsers, pageInfo } = useGetUsers();
   const { setIsShowModal, isShowModal } = useToggleModalContext();
   const [dataId] = useState<string>();
 
@@ -38,7 +38,7 @@ const Reconciliation = () => {
 
   useEffect(() => {
     fetchReconciliationData();
-    fetchAllUsers();
+    fetchAllUsers(pageInfo!);
     fetchTransaction({ type: "RECONCILIATION" });
   }, []);
 
