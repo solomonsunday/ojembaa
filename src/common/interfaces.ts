@@ -32,6 +32,13 @@ export interface IUser extends ISignUpUser, Omit<ISignUpUser, "password"> {
   status: string; // Active or Inactive
 }
 
+export interface IPageInfo {
+  total?: number;
+  limit?: number | 10;
+  page?: number;
+  totalPages?: number;
+}
+
 export interface IAppUsers {
   id: string;
   address: string;

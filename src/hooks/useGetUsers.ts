@@ -1,4 +1,4 @@
-import { IAppUsers } from "@/common/interfaces";
+import { IAppUsers, IPageInfo } from "@/common/interfaces";
 import { httpGetUsers } from "@/services/requests";
 import { AxiosError } from "axios";
 import { useCallback, useEffect, useState } from "react";
@@ -6,14 +6,16 @@ import { toast } from "react-toastify";
 
 export const useGetUsers = () => {
   const [users, setUsers] = useState<IAppUsers[]>([]);
+  const [pageInfo, setPageInfo] = useState<IPageInfo>();
   const [loading, setLoading] = useState(true);
 
-  const fetchAllUsers = useCallback(async () => {
+  const fetchAllUsers = useCallback(async (query: IPageInfo) => {
     try {
       setLoading(true);
-      const res = await httpGetUsers();
+      const res = await httpGetUsers({ limit: query.limit, page: query.page });
       if (res) {
-        setUsers(res.data.data);
+        setUsers(res.data?.data);
+        setPageInfo(res.data.pageInfo);
       }
     } catch (error) {
       let errorMessage: string = "";
@@ -28,9 +30,9 @@ export const useGetUsers = () => {
     }
   }, []);
 
-  useEffect(() => {
-    fetchAllUsers();
-  }, [fetchAllUsers]);
+  // useEffect(() => {
+  //   fetchAllUsers({ limit: 10 });
+  // }, [fetchAllUsers]);
 
-  return { fetchAllUsers, users, loading, setLoading };
+  return { fetchAllUsers, users, loading, setLoading, pageInfo };
 };

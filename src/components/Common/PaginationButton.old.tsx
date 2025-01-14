@@ -41,6 +41,7 @@ const PaginationButton = ({
       animate="visible"
     >
       <ReactPaginate
+        forcePage={currentPage}
         breakLabel={<span className="mr-4">...</span>}
         nextLabel={
           showNextButton ? (

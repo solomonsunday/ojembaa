@@ -2,6 +2,7 @@ import axios from "axios";
 import {
   IAppUsers,
   ICategories,
+  IPageInfo,
   ISettings,
   ISignIn,
   ISignUpUser,
@@ -150,11 +151,12 @@ export async function httpGetCourierDetailById(id: string) {
 }
 
 // User
-export async function httpGetUsers() {
+export async function httpGetUsers(query: IPageInfo) {
   return axios.get(`${API_URL}/admin/users`, {
     headers: {
       Authorization: "Bearer " + getAuthFromLocal(),
     },
+    params: { ...query, limit: 10 },
   });
 }
 

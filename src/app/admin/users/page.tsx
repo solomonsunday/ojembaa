@@ -13,19 +13,21 @@ import { Menu, Transition } from "@headlessui/react";
 import Link from "next/link";
 import Swal from "sweetalert2";
 import { UserRole } from "@/common/constants/enum";
+import PaginationButton from "@/components/Common/PaginationButton.old";
 
 const User = () => {
-  const { fetchAllUsers, users, loading, setLoading } = useGetUsers();
+  const { fetchAllUsers, users, pageInfo, loading, setLoading } = useGetUsers();
   const { UpdateUserDetailById } = useUpdateUserDetail();
   const [filteredUser, setFilteredUser] = useState<IAppUsers[]>([]);
+  const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
     setFilteredUser(users);
   }, [users]);
 
   useEffect(() => {
-    fetchAllUsers();
-  }, []);
+    fetchAllUsers({ ...pageInfo, page: currentPage + 1 });
+  }, [currentPage]);
 
   const updateUserStatus = async (
     id: string,
@@ -50,7 +52,7 @@ const User = () => {
     } catch (error) {
       console.log(error);
     } finally {
-      await fetchAllUsers();
+      await fetchAllUsers(pageInfo!);
       setLoading(false);
     }
   };
@@ -150,7 +152,7 @@ const User = () => {
                   return (
                     <tr className="hover:bg-orange-200" key={idx}>
                       <td className="p-2 text-sm text-gray-700 capitalize whitespace-nowrap ">
-                        {idx + 1}
+                        {(pageInfo?.page! - 1) * pageInfo?.limit! + idx + 1}
                       </td>
                       <td className="p-2 text-sm text-gray-700 capitalize whitespace-nowrap">
                         {data.firstName}
@@ -288,6 +290,11 @@ const User = () => {
             )
           )}
         </div>
+        <PaginationButton
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          totalPages={pageInfo?.totalPages!}
+        />
       </Container>
     </AdminLayout>
   );
