@@ -20,14 +20,19 @@ import DeliveryList from "@/components/Admin/deliveriesList";
 const Dashboard = () => {
   const currentUser: IAppUsers = getCurrentUser();
   const { fetchAllUsers, pageInfo } = useGetUsers();
+  const [currentPage, setCurrentPage] = useState(0);
 
   const { fetchStat, loading: loadingStats, stats } = useGetStats();
-  const { fetchRecentDelivery, recentDelivery, loading } =
-    useGetRecentDelivery();
+  const {
+    fetchRecentDelivery,
+    recentDelivery,
+    loading,
+    pageInfo: deliveriesPageInfo,
+  } = useGetRecentDelivery();
 
   useEffect(() => {
-    fetchRecentDelivery();
-  }, []);
+    fetchRecentDelivery({ ...pageInfo, page: currentPage + 1 });
+  }, [currentPage]);
 
   const [statsData, setStatsData] = useState<{
     data: {
@@ -105,7 +110,13 @@ const Dashboard = () => {
             <div className="mt-5">
               <hr className="border-slate-500" />
             </div>
-            <DeliveryList deliveriesData={recentDelivery} loading={loading} />
+            <DeliveryList
+              deliveriesData={recentDelivery}
+              loading={loading}
+              deliveriesPageInfo={deliveriesPageInfo!}
+              setCurrentPage={setCurrentPage}
+              currentPage={currentPage}
+            />
           </div>
         </Container>
       </AdminLayout>

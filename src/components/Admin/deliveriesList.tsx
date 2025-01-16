@@ -2,13 +2,21 @@ import React from "react";
 import { Spinner } from "../Common/Spinner";
 import { useRouter } from "next/navigation";
 import dayjs from "dayjs";
+import PaginationButton from "../Common/PaginationButton.old";
+import { IPageInfo } from "@/common/interfaces";
 
 const DeliveryList = ({
   loading,
   deliveriesData,
+  deliveriesPageInfo,
+  currentPage,
+  setCurrentPage,
 }: {
   loading: boolean;
   deliveriesData: any;
+  deliveriesPageInfo: IPageInfo;
+  currentPage: number;
+  setCurrentPage: any;
 }) => {
   const router = useRouter();
 
@@ -59,7 +67,10 @@ const DeliveryList = ({
                     }
                   >
                     <td className="p-2 text-sm text-gray-700 capitalize whitespace-nowrap">
-                      {idx + 1}
+                      {(deliveriesPageInfo?.page! - 1) *
+                        deliveriesPageInfo?.limit! +
+                        idx +
+                        1}
                     </td>
                     <td className="p-2 text-sm text-gray-700 capitalize whitespace-nowrap">
                       {data.package.description}
@@ -77,7 +88,7 @@ const DeliveryList = ({
                       {dayjs(data?.courier?.createdAt).format("M/D/YYYY")}
                     </td>
                     <td className="p-2 text-sm text-gray-700 whitespace-nowrap">
-                    &#8358;{data?.totalCost}{" "}
+                      &#8358;{data?.totalCost}{" "}
                     </td>
                     <td className="p-2 text-sm text-gray-700 whitespace-nowrap">
                       {data.status}{" "}
@@ -100,7 +111,11 @@ const DeliveryList = ({
           )
         )}
       </div>
-      {/* <Pagination  /> */}
+      <PaginationButton
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        totalPages={deliveriesPageInfo?.totalPages!}
+      />
     </div>
   );
 };

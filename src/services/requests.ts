@@ -73,17 +73,13 @@ export async function httpGetStats(query?: QueryParamDto) {
   return response.data;
 }
 
-export async function httpGetRecentDelivery(query?: QueryParamDto) {
-  const response = await axios.get(
-    `${API_URL}/admin/dashboard/recent-deliveries`,
-    {
-      headers: {
-        Authorization: "Bearer " + getAuthFromLocal(),
-      },
-      params: { ...query },
-    }
-  );
-  return response.data;
+export async function httpGetRecentDelivery(query?: IPageInfo) {
+  return axios.get(`${API_URL}/admin/dashboard/recent-deliveries`, {
+    headers: {
+      Authorization: "Bearer " + getAuthFromLocal(),
+    },
+    params: { ...query, limit: 3 },
+  });
 }
 
 export async function httpUpdateCategoryById(id: string, object: ICategories) {
