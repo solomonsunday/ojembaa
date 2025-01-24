@@ -78,7 +78,7 @@ export async function httpGetRecentDelivery(query?: IPageInfo) {
     headers: {
       Authorization: "Bearer " + getAuthFromLocal(),
     },
-    params: { ...query, limit: 3 },
+    params: { ...query, limit: 10 },
   });
 }
 
@@ -152,7 +152,7 @@ export async function httpGetUsers(query: IPageInfo) {
     headers: {
       Authorization: "Bearer " + getAuthFromLocal(),
     },
-    params: { ...query, limit: 10 },
+    params: { ...query, limit: 20 },
   });
 }
 

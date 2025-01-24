@@ -164,19 +164,6 @@ export interface ITransaction {
   updatedAt: Date;
 }
 
-export interface ITransaction {
-  id: string;
-  courierId: string;
-  courier: IAppUsers;
-  type: TransactionEnums;
-  amount: number;
-  prevBalance: number;
-  currBalance: number;
-  recordId: string;
-  proof: string;
-  status: TransactionStatus;
-}
-
 export enum TransactionEnums {
   DELIVERY = "DELIVERY",
   RECONCILIATION = "RECONCILIATION",

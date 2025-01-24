@@ -1,5 +1,5 @@
 "use client";
-import { ICourierDetails } from "@/common/interfaces";
+import { ICourierDetails, ITransaction } from "@/common/interfaces";
 import BackButton from "@/components/Admin/backButton";
 import Container from "@/components/Admin/Container";
 import CourierBankInformation from "@/components/Admin/CourierBankInformation";
@@ -8,20 +8,36 @@ import AdminLayout from "@/components/Admin/layout";
 import Tool from "@/components/Admin/Tool";
 import { Spinner } from "@/components/Common/Spinner";
 import { useGetCourierDetailById } from "@/hooks/useGetCourierDetails";
+import { useGetTransactions } from "@/hooks/useGetTransactions";
 import { useEffect, useState } from "react";
 
 const UserViewPage = ({ params }: { params: { slug: string } }) => {
   const userID = params.slug;
   const [userDetail, setUserDetail] = useState<ICourierDetails>();
+  const [userTransaction, setTransaction] = useState<ITransaction>();
   const {
     courier,
     fetchCourierDetailById,
     isLoading: loading,
   } = useGetCourierDetailById();
 
+  const { fetchTransaction, transactions } = useGetTransactions();
+
   useEffect(() => {
     fetchCourierDetailById(userID);
     setUserDetail(courier);
+  }, [userID]);
+
+  useEffect(() => {
+    fetchTransaction();
+  }, []);
+
+  console.log(userTransaction, "transactions");
+  console.log(transactions, "transactions");
+
+  useEffect(() => {
+    const userTransaction = transactions.filter((item) => item.id === userID);
+    setTransaction(userTransaction[0]);
   }, [userID]);
 
   useEffect(() => {
