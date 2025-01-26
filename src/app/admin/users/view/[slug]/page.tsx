@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 const UserViewPage = ({ params }: { params: { slug: string } }) => {
   const userID = params.slug;
   const [userDetail, setUserDetail] = useState<ICourierDetails>();
-  const [userTransaction, setTransaction] = useState<ITransaction>();
+  const [userTransaction, setUserTransaction] = useState<ITransaction>();
   const {
     courier,
     fetchCourierDetailById,
@@ -32,13 +32,13 @@ const UserViewPage = ({ params }: { params: { slug: string } }) => {
     fetchTransaction();
   }, []);
 
-  console.log(userTransaction, "transactions");
-  console.log(transactions, "transactions");
-
   useEffect(() => {
-    const userTransaction = transactions.filter((item) => item.id === userID);
-    setTransaction(userTransaction[0]);
-  }, [userID]);
+    const userTransactions = transactions.filter(
+      (item) => item?.courierId === userID
+    );
+
+    setUserTransaction(userTransactions[0]);
+  }, [userID, transactions]);
 
   useEffect(() => {
     setUserDetail(courier);
@@ -175,6 +175,15 @@ const UserViewPage = ({ params }: { params: { slug: string } }) => {
                     </span>
                   </div>
                 )}
+                <div className="font-bold flex">
+                  <div className="pr-5">
+                    <p>Unreconciled Amount: </p>
+                  </div>{" "}
+                  <span className="capitalize font-normal">
+                    {" "}
+                    &#8358;{userTransaction?.prevBalance || "0.00"}
+                  </span>
+                </div>
               </div>
             </div>
             <div className="mt-10">

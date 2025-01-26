@@ -81,14 +81,17 @@ const Reconciliation = () => {
             <p className="font-semibold"> Reconciled</p>
             <div className="font-semibold text-xl text-slate-500">
               <p className="font-semibold">
-                {numeral(reconciledAmount).format("0,0.00")}
+                &#8358;{numeral(reconciledAmount).format("0,0.00")}
               </p>
             </div>
           </div>
           <div className="border border-slate-300 rounded-md w-full p-7">
             <p className="font-semibold"> Unreconciled</p>
             <div className="font-semibold text-xl text-slate-500">
-              <p>{numeral(totalUnreconciledAmount).format("N0,0.00")}</p>
+              <p>
+                {" "}
+                &#8358;{numeral(totalUnreconciledAmount).format("N0,0.00")}
+              </p>
             </div>
           </div>
         </div>
@@ -127,7 +130,7 @@ const Reconciliation = () => {
                         {data?.courier?.email}
                       </td>
                       <td className="p-2 text-sm text-gray-700 whitespace-nowrap">
-                        {data?.amount}
+                        &#8358;{data?.amount}
                       </td>
                       <td className="p-2 text-sm text-gray-700 whitespace-nowrap">
                         {dayjs(data?.createdAt).format("MMMM D, YYYY")}
