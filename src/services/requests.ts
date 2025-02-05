@@ -156,8 +156,8 @@ export async function httpGetUsers(query: IPageInfo) {
   });
 }
 
-export async function httpUpdateUserById(id: string, data: Partial<IAppUsers>) {
-  return await axios.patch(`${API_URL}/admin/couriers/${id}`, data, {
+export async function httpUpdateUserById(courierId: string, data: Partial<IAppUsers>) {
+  return await axios.patch(`${API_URL}/admin/couriers/${courierId}`, data, {
     headers: {
       Authorization: "Bearer " + getAuthFromLocal(),
     },

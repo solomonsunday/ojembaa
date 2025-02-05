@@ -9,10 +9,10 @@ export const useUpdateUserDetail = () => {
   const [userDetail, setUserDetail] = useState<Partial<IAppUsers>>();
 
   const UpdateUserDetailById = useCallback(
-    async (id: string, data: Partial<IAppUsers>) => {
+    async (courierId: string, data: Partial<IAppUsers>) => {
       try {
         setLoading(true);
-        const result = await httpUpdateUserById(id, data);
+        const result = await httpUpdateUserById(courierId, data);
         if (result) {
           setUserDetail(result.data.data);
           toast.success("user updated successfully!");

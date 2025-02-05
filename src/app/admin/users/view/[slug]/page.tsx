@@ -177,11 +177,21 @@ const UserViewPage = ({ params }: { params: { slug: string } }) => {
                 )}
                 <div className="font-bold flex">
                   <div className="pr-5">
-                    <p>Unreconciled Amount: </p>
+                    <p>Reconciled Amount: </p>
                   </div>{" "}
                   <span className="capitalize font-normal">
                     {" "}
                     &#8358;{userTransaction?.prevBalance || "0.00"}
+                  </span>
+                </div>
+
+                <div className="font-bold flex">
+                  <div className="pr-5">
+                    <p>Unreconciled Amount: </p>
+                  </div>{" "}
+                  <span className="capitalize font-normal">
+                    {" "}
+                    &#8358;{userTransaction?.amount || "0.00"}
                   </span>
                 </div>
               </div>
