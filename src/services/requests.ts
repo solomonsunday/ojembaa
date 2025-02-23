@@ -146,6 +146,14 @@ export async function httpGetCourierDetailById(id: string) {
   });
 }
 
+export async function httpGetCourierTransactionsById(courierId: string) {
+  return axios.get(`${API_URL}/admin/transactions/courier/${courierId}`, {
+    headers: {
+      Authorization: "Bearer " + getAuthFromLocal(),
+    },
+  });
+}
+
 // User
 export async function httpGetUsers(query: IPageInfo) {
   return axios.get(`${API_URL}/admin/users`, {
@@ -156,7 +164,10 @@ export async function httpGetUsers(query: IPageInfo) {
   });
 }
 
-export async function httpUpdateUserById(courierId: string, data: Partial<IAppUsers>) {
+export async function httpUpdateUserById(
+  courierId: string,
+  data: Partial<IAppUsers>
+) {
   return await axios.patch(`${API_URL}/admin/couriers/${courierId}`, data, {
     headers: {
       Authorization: "Bearer " + getAuthFromLocal(),

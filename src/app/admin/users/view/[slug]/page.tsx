@@ -1,5 +1,5 @@
 "use client";
-import { ICourierDetails, ITransaction } from "@/common/interfaces";
+import { ICourierDetails } from "@/common/interfaces";
 import BackButton from "@/components/Admin/backButton";
 import Container from "@/components/Admin/Container";
 import CourierBankInformation from "@/components/Admin/CourierBankInformation";
@@ -8,20 +8,21 @@ import AdminLayout from "@/components/Admin/layout";
 import Tool from "@/components/Admin/Tool";
 import { Spinner } from "@/components/Common/Spinner";
 import { useGetCourierDetailById } from "@/hooks/useGetCourierDetails";
-import { useGetTransactions } from "@/hooks/useGetTransactions";
+import { useGetCourierTransactionsById } from "@/hooks/useGetCourierTransactionById";
 import { useEffect, useState } from "react";
 
 const UserViewPage = ({ params }: { params: { slug: string } }) => {
   const userID = params.slug;
   const [userDetail, setUserDetail] = useState<ICourierDetails>();
-  const [userTransaction, setUserTransaction] = useState<ITransaction>();
+
   const {
     courier,
     fetchCourierDetailById,
     isLoading: loading,
   } = useGetCourierDetailById();
 
-  const { fetchTransaction, transactions } = useGetTransactions();
+  const { courierTransactions, fetchCourierTransactionsById } =
+    useGetCourierTransactionsById();
 
   useEffect(() => {
     fetchCourierDetailById(userID);
@@ -29,16 +30,8 @@ const UserViewPage = ({ params }: { params: { slug: string } }) => {
   }, [userID]);
 
   useEffect(() => {
-    fetchTransaction();
+    fetchCourierTransactionsById(userID);
   }, []);
-
-  useEffect(() => {
-    const userTransactions = transactions.filter(
-      (item) => item?.courierId === userID
-    );
-
-    setUserTransaction(userTransactions[0]);
-  }, [userID, transactions]);
 
   useEffect(() => {
     setUserDetail(courier);
@@ -181,7 +174,8 @@ const UserViewPage = ({ params }: { params: { slug: string } }) => {
                   </div>{" "}
                   <span className="capitalize font-normal">
                     {" "}
-                    &#8358;{userTransaction?.prevBalance || "0.00"}
+                    &#8358;
+                    {courierTransactions?.totalReconciledPayments || "0.00"}
                   </span>
                 </div>
 
@@ -191,7 +185,8 @@ const UserViewPage = ({ params }: { params: { slug: string } }) => {
                   </div>{" "}
                   <span className="capitalize font-normal">
                     {" "}
-                    &#8358;{userTransaction?.amount || "0.00"}
+                    &#8358;
+                    {courierTransactions?.totalUnreconciledPayments || "0.00"}
                   </span>
                 </div>
               </div>
