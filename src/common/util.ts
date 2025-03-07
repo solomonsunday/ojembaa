@@ -4,3 +4,5 @@ export function toTitleCase(text: string | undefined): string {
   }
   return text.replace(/^./, text[0].toUpperCase());
 }
+
+

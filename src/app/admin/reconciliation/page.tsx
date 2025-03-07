@@ -12,8 +12,10 @@ import numeral from "numeral";
 import { useGetUsers } from "@/hooks/useGetUsers";
 import { useGetTransactions } from "@/hooks/useGetTransactions";
 import dayjs from "dayjs";
+import { useRouter } from "next/navigation";
 
 const Reconciliation = () => {
+  const router = useRouter();
   const { fetchReconciliationData, reconciliation, loading } =
     useGetReconciliation();
   const {
@@ -112,9 +114,6 @@ const Reconciliation = () => {
                 <th className="p-3 text-sm font-bold tracking-wide text-left">
                   Date of Payment
                 </th>
-                {/* <th className="p-3 text-sm font-bold tracking-wide text-left">
-                  Action
-                </th> */}
               </tr>
             </thead>
 
@@ -122,7 +121,15 @@ const Reconciliation = () => {
               {!loadingTransactions &&
                 transactions?.map((data) => {
                   return (
-                    <tr className="" key={data.id}>
+                    <tr
+                      className="hover:bg-orange-200 cursor-pointer"
+                      key={data.id}
+                      onClick={() =>
+                        router.push(
+                          `/admin/reconciliation/paymentDetail/${data.id}`
+                        )
+                      }
+                    >
                       <td className="p-2 text-sm text-gray-700 capitalize whitespace-nowrap">
                         {`${data?.courier?.firstName} ${data?.courier?.lastName}`}
                       </td>

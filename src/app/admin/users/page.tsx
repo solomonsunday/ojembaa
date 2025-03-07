@@ -14,12 +14,20 @@ import Link from "next/link";
 import Swal from "sweetalert2";
 import { UserRole } from "@/common/constants/enum";
 import PaginationButton from "@/components/Common/PaginationButton.old";
+import useSortList from "@/common/useSortList";
 
 const User = () => {
   const { fetchAllUsers, users, pageInfo, loading, setLoading } = useGetUsers();
   const { UpdateUserDetailById } = useUpdateUserDetail();
   const [filteredUser, setFilteredUser] = useState<IAppUsers[]>([]);
   const [currentPage, setCurrentPage] = useState(0);
+  const [selectedValue, setSelectedValue] = useState("all");
+
+  const { handleSelectChange } = useSortList(
+    setFilteredUser,
+    setSelectedValue,
+    users
+  );
 
   useEffect(() => {
     setFilteredUser(users);
@@ -61,7 +69,7 @@ const User = () => {
     if (query.trim() === "") {
       setFilteredUser(users);
     } else {
-      const bulletinSearchResults =
+      const userList =
         users &&
         users.filter((item) => {
           return (
@@ -69,7 +77,7 @@ const User = () => {
             item.lastName.toLowerCase().includes(query.toLowerCase())
           );
         });
-      setFilteredUser(bulletinSearchResults);
+      setFilteredUser(userList);
     }
   };
 
@@ -114,8 +122,17 @@ const User = () => {
   return (
     <AdminLayout>
       <Container className="md:pl-[3.75rem] md:pr-[4.625rem] pl-[2.5rem] pt-10 pb-7">
-        <div className="flex flex-col justify-between mb-5 lg:flex-row gap-y-5">
+        <div className="flex flex-col gap-x-2 mb-5 lg:flex-row gap-y-5">
           <Search onSearch={handleSearch} />
+          <select
+            className=" bg-white w-28 h-[2.9375rem] border border-black rounded-lg flex pl-[.9375rem] gap-x-1 font-poppins"
+            onChange={handleSelectChange}
+            value={selectedValue}
+          >
+            <option value="all">All</option>
+            <option value="courier">Courier</option>
+            <option value="sender">Sender</option>
+          </select>
         </div>
         <hr className="w-full" />
         <div className="mb-4 overflow-auto rounded-lg">

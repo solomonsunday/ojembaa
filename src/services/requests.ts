@@ -1,5 +1,6 @@
 import axios from "axios";
 import {
+  IApproveTxn,
   IAppUsers,
   ICategories,
   IPageInfo,
@@ -106,6 +107,26 @@ export async function httpGetReconciliationData(query?: QueryParamDto) {
     params: { ...query },
   });
   return response.data.data;
+}
+
+export async function httpGetCourierPaymentDataById(id: string) {
+  const response = await axios.get(`${API_URL}/admin/transactions/${id}`, {
+    headers: {
+      Authorization: "Bearer " + getAuthFromLocal(),
+    },
+  });
+  return response.data.data;
+}
+
+export async function httpPatchApproveOrRejectPayment(
+  id: string,
+  data: IApproveTxn
+) {
+  return axios.patch(`${API_URL}/admin/transactions/${id}/approve`, data, {
+    headers: {
+      Authorization: "Bearer " + getAuthFromLocal(),
+    },
+  });
 }
 
 // Setting Request

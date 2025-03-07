@@ -40,6 +40,7 @@ export interface IPageInfo {
 }
 
 export interface IAppUsers {
+  filter(arg0: (item: any) => boolean): unknown;
   id: string;
   address: string;
   bannedIpAddress: string;
@@ -179,4 +180,24 @@ export enum TransactionStatus {
 export enum UserStatusEnum {
   ACTIVE = "active",
   INACTIVE = "inactive",
+}
+
+export enum ApproveTxnDto {
+  APPROVE = "approve",
+  REJECT = "reject",
+}
+
+export interface IPaymentDetail {
+  id: string;
+  courierId: string;
+  amount: number;
+  proof: string;
+  approvedById: null;
+  createdAt: string;
+  courier: ICourierDetails;
+}
+
+export interface IApproveTxn {
+  status: ApproveTxnDto;
+  reason: string;
 }

@@ -8,7 +8,7 @@ import AdminLayout from "@/components/Admin/layout";
 import Tool from "@/components/Admin/Tool";
 import { Spinner } from "@/components/Common/Spinner";
 import { useGetCourierDetailById } from "@/hooks/useGetCourierDetails";
-import { useGetCourierTransactionsById } from "@/hooks/useGetCourierTransactionById";
+import { useGetCourierTransactionsById } from "@/hooks/useGetCourierTransactionsById";
 import { useEffect, useState } from "react";
 
 const UserViewPage = ({ params }: { params: { slug: string } }) => {
