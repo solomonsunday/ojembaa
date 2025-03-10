@@ -19,11 +19,12 @@ export const useApproveOrReject = () => {
         let errorMessage: string = "";
         if (error instanceof AxiosError) {
           errorMessage = error?.response?.data?.message;
+        } else {
+          console.log(error);
+          toast.error(errorMessage);
         }
-        toast.error(errorMessage);
         //@ts-ignore
         //   setError(error.message);
-        console.log(error);
       } finally {
         setLoading(false);
       }
