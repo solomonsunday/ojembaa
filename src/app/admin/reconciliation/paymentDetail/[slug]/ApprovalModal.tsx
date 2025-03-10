@@ -5,7 +5,6 @@ import Input from "@/components/Admin/input";
 import Button from "@/components/Admin/button";
 import { useApproveOrReject } from "@/hooks/useCreateApproveOrReject";
 import { ApproveTxnDto } from "../../../../../common/interfaces";
-import { toast } from "react-toastify";
 
 interface IModal {
   handleShowModal: () => void;
@@ -22,11 +21,10 @@ const ApprovalModal = ({ handleShowModal, courierId }: IModal) => {
 
   const { createApprovePayment, loading } = useApproveOrReject();
 
-  const onSubmit = (data: IApproveTxn) => {
+  const onSubmit = async (data: IApproveTxn) => {
     try {
       data.status = ApproveTxnDto.APPROVE;
-      createApprovePayment(courierId!, data);
-      toast.success("Payment approved successfully!");
+      await createApprovePayment(courierId!, data);
       handleShowModal();
       reset();
       window.location.reload();

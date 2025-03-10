@@ -12,9 +12,9 @@ export const useApproveOrReject = () => {
     async (courierId: string, data: IApproveTxn) => {
       try {
         setLoading(true);
-        console.log("testing..");
         const response = await httpPatchApproveOrRejectPayment(courierId, data);
         setStatus(response.data);
+        toast.success("Payment approved successfully!");
       } catch (error) {
         let errorMessage: string = "";
         if (error instanceof AxiosError) {
