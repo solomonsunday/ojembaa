@@ -114,6 +114,9 @@ const Reconciliation = () => {
                 <th className="p-3 text-sm font-bold tracking-wide text-left">
                   Date of Payment
                 </th>
+                <th className="p-3 text-sm font-bold tracking-wide text-left">
+                  Status
+                </th>
               </tr>
             </thead>
 
@@ -141,6 +144,17 @@ const Reconciliation = () => {
                       </td>
                       <td className="p-2 text-sm text-gray-700 whitespace-nowrap">
                         {dayjs(data?.createdAt).format("MMMM D, YYYY")}
+                      </td>
+                      <td className=" text-sm whitespace-nowrap uppercase text-white text-center">
+                        {data.status === "pending" ? (
+                          <div className="p-2 border rounded-md bg-yellow-400">
+                            {data?.status}
+                          </div>
+                        ) : (
+                          <div className="p-2 border rounded-md bg-green-600">
+                            {data?.status}
+                          </div>
+                        )}
                       </td>
                     </tr>
                   );

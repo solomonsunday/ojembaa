@@ -60,17 +60,20 @@ const courierPayment = ({ params }: { params: { slug: string } }) => {
             <div>
               <div className="flex flex-row-reverse gap-3">
                 <div className="flex gap-1 ">
-                  {
-                    //if approve ? then show the badge else show the button.
+                  {courierPayment?.status === "pending" ? (
                     <div>
                       <Button
                         className="rounded-md border bg-orange-500 py-2 px-2 hover:bg-orange-400"
                         onClick={() => handleShowModal()}
                       >
-                        <span className="font-bold">Approve or Reject</span>
+                        <span className="font-bold px-4">Approve</span>
                       </Button>
                     </div>
-                  }
+                  ) : (
+                    <div className="border rounded-md p-3 bg-green-500 text-white">
+                      Approved
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="flex justify-between align-middle my-5 border border-slate-400 rounded-2xl p-6">

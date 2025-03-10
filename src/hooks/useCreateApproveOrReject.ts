@@ -12,7 +12,6 @@ export const useApproveOrReject = () => {
     async (courierId: string, data: IApproveTxn) => {
       try {
         setLoading(true);
-        return console.log(courierId, data, "test value");
         const response = await httpPatchApproveOrRejectPayment(courierId, data);
         setStatus(response.data);
       } catch (error) {

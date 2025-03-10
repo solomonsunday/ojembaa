@@ -20,22 +20,17 @@ const ApprovalModal = ({ handleShowModal, courierId }: IModal) => {
   } = useForm<IApproveTxn>();
 
   const { createApprovePayment, loading } = useApproveOrReject();
-  const [actionTake, setActionTaken] = useState<string>("");
 
   const onSubmit = (data: IApproveTxn) => {
     try {
-      if (actionTake === ApproveTxnDto.REJECT) {
-        console.log(actionTake, "actionTake");
-        data.status = ApproveTxnDto.REJECT;
-      } else {
-        data.status = ApproveTxnDto.APPROVE;
-      }
+      data.status = ApproveTxnDto.APPROVE;
       createApprovePayment(courierId!, data);
       reset();
     } catch (error) {
       console.log(error);
     } finally {
       handleShowModal();
+      window.location.reload();
     }
   };
 
@@ -73,20 +68,11 @@ const ApprovalModal = ({ handleShowModal, courierId }: IModal) => {
 
           <div className="pb-2 flex justify-between gap-3">
             <Button
-              className="py-3 flex items-center justify-center bg-green-800 rounded-md text-white hover:bg-green-500 w-full"
+              className="py-3  justify-center bg-green-800 rounded-md text-white hover:bg-green-500 w-full"
               type="submit"
               disabled={loading}
-              onClick={() => setActionTaken(ApproveTxnDto.APPROVE)}
             >
               {loading ? "Approving..." : "Approve"}
-            </Button>
-            <Button
-              className="py-3 flex items-center justify-center bg-red-800 rounded-md text-white hover:bg-red-500 w-full"
-              type="submit"
-              disabled={loading}
-              onClick={() => setActionTaken(ApproveTxnDto.REJECT)}
-            >
-              {loading ? "Rejecting..." : "Reject"}
             </Button>
           </div>
         </form>
