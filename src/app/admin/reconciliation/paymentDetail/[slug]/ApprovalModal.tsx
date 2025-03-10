@@ -25,11 +25,11 @@ const ApprovalModal = ({ handleShowModal, courierId }: IModal) => {
     try {
       data.status = ApproveTxnDto.APPROVE;
       createApprovePayment(courierId!, data);
-      reset();
     } catch (error) {
       console.log(error);
     } finally {
       handleShowModal();
+      reset();
       window.location.reload();
     }
   };
