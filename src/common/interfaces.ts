@@ -201,3 +201,20 @@ export interface IApproveTxn {
   status: ApproveTxnDto;
   reason: string;
 }
+
+export interface ICourierTransaction {
+  amount: string;
+  courier: ICourierDetails;
+  courierId: string;
+  currBalance: number;
+  deliveryCharge: number;
+  id: string;
+  prevBalance: number;
+  proof: string;
+  recordId: string;
+  status: string;
+  total: number;
+  type: string;
+  totalReconciledPayments: number;
+  totalUnreconciledPayments: number;
+}
