@@ -15,19 +15,11 @@ const Header = ({ open }: { open: () => void }) => {
         onClick={() => open()}
       >
         <Image
-          src={"/assets/svgs/logo-purple-dots.svg"}
+          src={"/assets/imgs/logo/ojembaa.jpeg"}
           className=""
           alt="icon"
           width={44.9}
           height={44.9}
-        />
-
-        <Image
-          src={"/assets/svgs/logo-dark.svg"}
-          className=""
-          alt="icon"
-          width={59}
-          height={62}
         />
       </div>
 

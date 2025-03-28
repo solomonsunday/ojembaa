@@ -78,7 +78,7 @@ const DeliverViewPage = ({ params }: { params: { slug: string } }) => {
                   </div>
                   <div className="flex gap-3">
                     <div className="font-bold">Receiver Phone:</div>
-                    <div>{deliveryDetail?.package?.receiverPhone}</div>
+                    <div>{deliveryDetail?.receiverPhone}</div>
                   </div>
                 </div>
                 <div>
@@ -92,7 +92,7 @@ const DeliverViewPage = ({ params }: { params: { slug: string } }) => {
                   </div>
                   <div className="flex gap-3">
                     <div className="font-bold">Courier Phone:</div>
-                    <div>{deliveryDetail?.package?.receiverPhone}</div>
+                    <div>{deliveryDetail?.courier?.phone}</div>
                   </div>
                   <div className="flex gap-3">
                     <div className="font-bold">Date of Booking:</div>

@@ -40,7 +40,7 @@ const DeliveryList = ({
               <th className="p-3 text-sm font-bold tracking-wide text-left">
                 Pickup Address
               </th>
-              <th className="p-3 text-sm font-bold tracking-wide text-left">
+              <th className="p-3 text-sm font-bold tracking-wide text-left ">
                 Delivery Address
               </th>
               <th className="p-3 text-sm font-bold tracking-wide text-left">
@@ -66,31 +66,31 @@ const DeliveryList = ({
                       router.push(`/admin/dashboard/deliveryDetail/${data.id}`)
                     }
                   >
-                    <td className="p-2 text-sm text-gray-700 capitalize whitespace-nowrap">
+                    <td className="p-2 text-sm text-gray-700 capitalize">
                       {(deliveriesPageInfo?.page! - 1) *
                         deliveriesPageInfo?.limit! +
                         idx +
                         1}
                     </td>
-                    <td className="p-2 text-sm text-gray-700 capitalize whitespace-nowrap">
+                    <td className="p-2 text-sm text-gray-700 capitalize">
                       {data.package.description}
                     </td>
-                    <td className="p-2 text-sm text-gray-700 capitalize whitespace-nowrap">
+                    <td className="p-2 text-sm text-gray-700 capitalize ">
                       {data.package.receiverName}
                     </td>
-                    <td className="p-2 text-sm text-gray-700 whitespace-nowrap">
+                    <td className="p-2 text-sm text-gray-700 capitalize">
                       {data.pickupAddress}
                     </td>
-                    <td className="p-2 text-sm text-gray-700 whitespace-nowrap">
+                    <td className="p-2 text-sm text-gray-700">
                       {data.deliveryAddress}
                     </td>
-                    <td className="p-2 text-sm text-gray-700 whitespace-nowrap">
-                      {dayjs(data?.courier?.createdAt).format("M/D/YYYY")}
+                    <td className="p-2 text-sm text-gray-700">
+                      {dayjs(data?.sender?.createdAt).format("M/D/YYYY")}
                     </td>
-                    <td className="p-2 text-sm text-gray-700 whitespace-nowrap">
+                    <td className="p-2 text-sm text-gray-700">
                       &#8358;{data?.totalCost}{" "}
                     </td>
-                    <td className="p-2 text-sm text-gray-700 whitespace-nowrap">
+                    <td className="p-2 text-sm text-gray-700">
                       {data.status}{" "}
                     </td>
                   </tr>
