@@ -97,7 +97,7 @@ const DeliverViewPage = ({ params }: { params: { slug: string } }) => {
                   <div className="flex gap-3">
                     <div className="font-bold">Date of Booking:</div>
                     <div>
-                      {dayjs(deliveryDetail?.courier?.createdAt).format(
+                      {dayjs(deliveryDetail?.sender?.createdAt).format(
                         "MMMM D, YYYY"
                       )}
                     </div>
