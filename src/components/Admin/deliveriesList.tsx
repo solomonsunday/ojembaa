@@ -85,7 +85,7 @@ const DeliveryList = ({
                       {data.deliveryAddress}
                     </td>
                     <td className="p-2 text-sm text-gray-700">
-                      {dayjs(data?.sender?.createdAt).format("M/D/YYYY")}
+                      {dayjs(data?.createdAt).format("M/D/YYYY")}
                     </td>
                     <td className="p-2 text-sm text-gray-700">
                       &#8358;{data?.totalCost}{" "}
